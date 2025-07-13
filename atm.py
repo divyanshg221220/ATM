@@ -18,9 +18,7 @@ def register(u,p):
                 print()
                 main()
     f.close()
-    print("REG...")
     add_sql(u,p)
-    print("CESSFUL")
     f=open("atm.csv","a",newline="")
     w=csv.writer(f)
     w.writerow([u,p,0])
@@ -147,7 +145,6 @@ def change(u,p):
 def add_sql(u,p):
     global usr,paswd
     con=mc.connect(host="localhost",user=usr,passwd=paswd,database="atm")
-    print(23456)
     cur=con.cursor()
     cur.execute("insert into atm values('{0}','{1}',{2});".format(u,p,0))
     con.commit()
