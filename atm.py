@@ -1,4 +1,4 @@
-import csv,os,time,mysql.connector as mc
+import csv,os,mysql.connector as mc
 def register(u,p):
     f=open("atm.csv","r",newline="")
     r=csv.reader(f)
@@ -56,14 +56,6 @@ def balance(u,p):
         if i[0]==u:
             b=float(i[2])
             print("YOUR BANK BALANCE IS : RS.",b)
-    f.close()
-    return b
-def rbalance(u,p):
-    f=open("atm.csv","r",newline="")
-    r=csv.reader(f)
-    for i in r:
-        if i[0]==u:
-            b=float(i[2])
     f.close()
     return b
 def deposit(u,p):
@@ -143,43 +135,17 @@ def change(u,p):
         print()
         change(u,p)
 def add_sql(u,p):
-    global usr,paswd
-    con=mc.connect(host="localhost",user=usr,passwd=paswd,database="atm")
+    con=mc.connect(host="localhost",user="root",passwd="tiger",database="atm")
     cur=con.cursor()
     cur.execute("insert into atm values('{0}','{1}',{2});".format(u,p,0))
     con.commit()
     con.close()
-    log(u,0)
 def update_sql(u,p):
-    global usr,paswd
-    con=mc.connect(host="localhost",user=usr,passwd=paswd,database="atm")
+    con=mc.connect(host="localhost",user="root",passwd="tiger",database="atm")
     cur=con.cursor()
     cur.execute("update atm set pin='{0}',balance={1} where user='{2}';".format(p,balance(u,p),u))
     con.commit()
     con.close()
-    log(u,rbalance(u,p))
-def log(u,b):
-    f=open("log.txt","a")
-    f.write(time.asctime()+":"+u+","+str(b)+"\n")
-    f.close()
-def sql_setup(usr,paswd,sql_status):
-    while sql_status==0:
-        usr=input("ENTER MYSQL USER NAME : ")
-        paswd=input("ENTER MYSQL USER PASSWORD : ")
-        try:
-            con=mc.connect(host="localhost",user=usr,passwd=paswd)
-            if con.is_connected():
-                con.close()
-                f=open("log.txt","w")
-                f.write(usr+","+paswd+"\n")
-                f.close()
-                print("SQL CONNECTION SUCCESSFUL")
-                print()
-                sql_status=1
-        except:
-            print("SQL CONNECTION FAILED. PLEASE TRY AGAIN")
-            print()
-            
 def menu(u,p):
     try:
         print()
@@ -228,31 +194,4 @@ def main():
         print("PLEASE TRY AGAIN WITH VALID INPUT")
         print()
         main()
-def setup():
-    f1=open("atm.sql","r")
-    sql_setup(None,None,0)
-    f2=open("log.txt","r")
-    r=f2.readline()
-    f2.close()
-    f3=open("atm.csv","w",newline="")
-    w=csv.writer(f3)
-    w.writerow(["user","pin","balance"])
-    f3.close()
-    usr,paswd=r.split(",")
-    paswd=paswd.rstrip("\n")
-    con=mc.connect(host="localhost",user=usr,passwd=paswd)
-    cur=con.cursor()
-    for i in f1:
-        cur.execute(i[:-1] if i.endswith("\n") else i)
-    con.commit()
-    con.close()
-    return usr,paswd
-try:
-    f=open("log.txt","r")
-    r=f.readline()
-    f.close()
-    usr,paswd=r.split(",")
-    paswd=paswd[:-1] if paswd.endswith("\n")==True else paswd
-except:
-    usr,paswd=setup()
 main()
