@@ -1,6 +1,6 @@
 # ATM
 ### FIRST : RUN THE COMMAND IN PYTHON TERMINAL "pip install mysql-connector-python".
-### SECOND : SAVE THE FILE "atm.sql" IN THE SAME LOCATION AS THE "atm.py".
+### SECOND : SAVE THE FILES IN THE SAME LOCATION.
 ### THIRD : RUN THE "setup.py" FILE.
 
 🏦 ATM Machine Simulation Project
