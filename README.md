@@ -1,6 +1,7 @@
 # ATM
 ### FIRST : RUN THE COMMAND IN PYTHON TERMINAL "pip install mysql-connector-python".
 ### SECOND : SAVE THE FILE "atm.sql" IN THE SAME LOCATION AS THE "atm.py".
+### THIRD : RUN THE "setup.py" FILE.
 
 🏦 ATM Machine Simulation Project
 This project simulates a functional ATM system that allows users to securely perform basic banking transactions through a command-line interface. The system is built with Python for the frontend and MySQL for backend data handling.
