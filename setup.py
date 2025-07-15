@@ -18,10 +18,6 @@ def setup():
     con.commit()
     con.close()
     return usr,paswd
-def log(u,b):
-    f=open("log.txt","a")
-    f.write(time.asctime()+":"+u+","+str(b)+"\n")
-    f.close()
 def sql_setup(usr,paswd,sql_status):
     while sql_status==0:
         usr=input("ENTER MYSQL USER NAME : ")

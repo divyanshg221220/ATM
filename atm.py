@@ -1,4 +1,4 @@
-import csv,os,mysql.connector as mc
+import csv,time,os,mysql.connector as mc
 def register(u,p):
     f=open("atm.csv","r",newline="")
     r=csv.reader(f)
@@ -76,6 +76,7 @@ def deposit(u,p):
         os.remove("atm.csv")
         os.rename("temp.csv","atm.csv")
         update_sql(u,p)
+        log(u,b,"DEPOSIT",m,b+m)
         menu(u,p)
     except:
         print()
@@ -103,6 +104,7 @@ def withdraw(u,p):
         os.remove("atm.csv")
         os.rename("temp.csv","atm.csv")
         update_sql(u,p)
+        log(u,b,"WITHDRAW",m,b-m)
         menu(u,p)
     except:
         print()
@@ -146,6 +148,10 @@ def update_sql(u,p):
     cur.execute("update atm set pin='{0}',balance={1} where user='{2}';".format(p,balance(u,p),u))
     con.commit()
     con.close()
+def log(u,b,act,amt,net_amt):
+    f=open("log.txt","a")
+    f.write(time.asctime()+":"+u+","+str(b)+","+act+","+str(amt)+","+str(net_amt)+"\n")
+    f.close()
 def menu(u,p):
     try:
         print()
