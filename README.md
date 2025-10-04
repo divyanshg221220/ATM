@@ -24,8 +24,6 @@ This project simulates a functional ATM system that allows users to securely per
 
 - Basic error handling for invalid input or failed authentication
 
-- SQL parameterization to prevent injection attacks (if implemented)
-
 ***🖥️ Tech Used
 FRONT-END : PYTHON
 BACK- END : MYSQL***
