@@ -18,11 +18,7 @@ This project simulates a functional ATM system that allows users to securely per
 
 *- PIN Management:* Users can create a new ATM PIN during account creation or securely change their existing PIN.
 
-*- Security Measures*
-
-- Password-style input masking for ATM PINs
-
-- Basic error handling for invalid input or failed authentication
+*- Security Measures:* Basic error handling for invalid input or failed authentication
 
 ***🖥️ Tech Used
 FRONT-END : PYTHON
