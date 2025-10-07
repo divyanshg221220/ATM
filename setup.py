@@ -1,4 +1,4 @@
-import csv,mysql.connector as mc
+import csv,mysql.connector as sqltor
 def setup():
     f1=open("atm.sql","r")
     sql_setup(None,None,0)
@@ -11,7 +11,7 @@ def setup():
     f3.close()
     usr,paswd=r.split(",")
     paswd=paswd.rstrip("\n")
-    con=mc.connect(host="localhost",user=usr,passwd=paswd)
+    con=sqltor.connect(host="localhost",user=usr,passwd=paswd)
     cur=con.cursor()
     for i in f1:
         cur.execute(i[:-1] if i.endswith("\n") else i)
@@ -23,7 +23,7 @@ def sql_setup(usr,paswd,sql_status):
         usr=input("ENTER MYSQL USER NAME : ")
         paswd=input("ENTER MYSQL USER PASSWORD : ")
         try:
-            con=mc.connect(host="localhost",user=usr,passwd=paswd)
+            con=sqltor.connect(host="localhost",user=usr,passwd=paswd)
             if con.is_connected():
                 con.close()
                 f=open("log.txt","w")

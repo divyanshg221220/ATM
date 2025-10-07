@@ -1,4 +1,4 @@
-import csv,time,os,mysql.connector as mc
+import csv,time,os,mysql.connector as sqltor
 def register(u,p):
     f=open("atm.csv","r",newline="")
     r=csv.reader(f)
@@ -137,13 +137,13 @@ def change(u,p):
         print()
         change(u,p)
 def add_sql(u,p):
-    con=mc.connect(host="localhost",user="root",passwd="tiger",database="atm")
+    con=sqltor.connect(host="localhost",user="root",passwd="tiger",database="atm")
     cur=con.cursor()
     cur.execute("insert into atm values('{0}','{1}',{2});".format(u,p,0))
     con.commit()
     con.close()
 def update_sql(u,p):
-    con=mc.connect(host="localhost",user="root",passwd="tiger",database="atm")
+    con=sqltor.connect(host="localhost",user="root",passwd="tiger",database="atm")
     cur=con.cursor()
     cur.execute("update atm set pin='{0}',balance={1} where user='{2}';".format(p,balance(u,p),u))
     con.commit()
